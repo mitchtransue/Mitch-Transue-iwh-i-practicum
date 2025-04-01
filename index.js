@@ -1,4 +1,4 @@
-// First commit for HubSpot Practicum
+First commit to my Integrating With HubSpot I: Foundations practicum repository.
 
 const express = require('express');
 const axios = require('axios');
