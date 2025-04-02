@@ -1,0 +1,18 @@
+//- updates.pug
+doctype html
+html
+  head
+    title= title
+  body
+    h1= title
+    form(action="/update-cobj" method="POST")
+      label(for="name") Name:
+      input(type="text" name="name" required)
+      br
+      label(for="bio") Bio:
+      input(type="text" name="bio" required)
+      br
+      label(for="other_property") Other Property:
+      input(type="text" name="other_property" required)
+      br
+      button(type="submit") Submit
