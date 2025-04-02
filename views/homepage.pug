@@ -1,0 +1,20 @@
+//- homepage.pug
+doctype html
+html
+  head
+    title= title
+  body
+    h1= title
+    a(href="/update-cobj") Add to this table
+    table
+      thead
+        tr
+          th Name
+          th Bio
+          th Other Property
+      tbody
+        each record in records
+          tr
+            td= record.properties.name
+            td= record.properties.bio
+            td= record.properties.other_property
