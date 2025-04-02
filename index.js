@@ -71,3 +71,23 @@ app.post('/update', async (req, res) => {
 
 // * Localhost
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));
+// Import required modules at the top of your file
+const express = require('express');
+const app = express();
+
+// Set the port for your app
+const port = 3000;
+
+// Serve static files (like CSS, images, etc.) from the 'public' folder
+app.use(express.static('public'));
+
+// Route for the homepage ("/")
+app.get("/", (req, res) => {
+  // Here, you'll render the homepage pug template
+  res.render('homepage');  // Assuming 'homepage.pug' is the template for the homepage
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
