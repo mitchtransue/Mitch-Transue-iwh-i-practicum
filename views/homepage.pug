@@ -10,11 +10,13 @@ html
       thead
         tr
           th Name
-          th Bio
-          th Other Property
+          th Temperment
+          th Collar Coler
+          th Vaccine Status
       tbody
         each record in records
           tr
             td= record.properties.name
-            td= record.properties.bio
-            td= record.properties.other_property
+            td= record.properties.temperment
+            td= record.properties.collar_coler
+            td= record.properties.vaccine_status

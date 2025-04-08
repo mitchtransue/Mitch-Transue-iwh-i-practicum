@@ -17,50 +17,85 @@ const PRIVATE_APP_ACCESS = process.env.ACCESS_TOKEN;
 
 // * Code for Route 1 goes here
 app.get("/", async (req, res) => {
-  return})
+    try {
+        // Fetch your CRM records here
+        // This is a placeholder - replace with your actual API call
+        const response = await axios.get(
+            `https://api.hubapi.com/crm/v3/objects/2-42773951?properties=pet_first_name,temperment,collar_coler,vaccine_status`,
+            {
+                headers: {
+                    authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+                    "content-type": "application/json"
+                }
+            }
+        );
 
+        const records = response.data.results;
+
+        res.render('homepage', {
+            title: 'CRM Records',
+            records: records.map(r => ({
+                properties: {
+                    name: r.properties.pet_first_name,
+                    temperment: r.properties.temperment,
+                    collar_coler: r.properties.collar_coler,
+                    vaccine_status: r.properties.vaccine_status
+
+                }
+            }))
+        });
+    } catch (error) {
+        console.error('Error fetching records:', error);
+        res.render('homepage', {
+            title: 'CRM Records',
+            records: [],
+            error: 'Failed to fetch records'
+        });
+    }
+    return
+})
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
 // * Code for Route 2 goes here
 app.get("/update-cobj", async (req, res) => {
     res.render('updates.pug', {
         title: "Update Custom Object Form | Integrating With HubSpot I Practicum"
-      })
     })
-    
+})
+
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
 app.post("/update-cobj", async (req, res) => {
 
-    const { name, temperment, collar_coler, vaccine_status } = req.body  
+    const { name, temperment, collar_coler, vaccine_status } = req.body
     try {
-      await axios.post(
-        `https://api.hubapi.com/crm/v3/objects/2-42773951`,
-        {
-          associations: [],
-          properties: {
-            pet_first_name: name,
-            temperment,
-            collar_coler,
-            vaccine_status
-          }
-        },
-        {
-          headers: {
-            authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-           "content-type": "application/json"
-        }
-      }
-    )
-  } catch (e) {
-    console.error(e)
+        await axios.post(
+            `https://api.hubapi.com/crm/v3/objects/2-42773951`,
+            {
+                associations: [],
+                properties: {
+                    pet_first_name: name,
+                    temperment,
+                    collar_coler,
+                    vaccine_status
+                }
+            },
+            {
+                headers: {
+                    authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+                    "content-type": "application/json"
+                }
+            }
+        )
+    } catch (e) {
+        console.error(e)
 
-    //res.status(500).send("Failure in POST /update-cobj")
-  }
+        //res.status(500).send("Failure in POST /update-cobj")
+    }
 
-  res.redirect("/")
-  return
+    res.redirect("/")
+    return
 })
 
 /** 
