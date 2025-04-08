@@ -1,6 +1,7 @@
 //First commit to my Integrating With HubSpot I: Foundations practicum repository.
 
 const express = require('express');
+require('dotenv').config();
 const axios = require('axios');
 const app = express();
 
@@ -32,7 +33,7 @@ app.get("/update-cobj", async (req, res) => {
 // * Code for Route 3 goes here
 app.post("/update-cobj", async (req, res) => {
 
-    const { name, year, genre } = req.body
+    const { name, bio, other_property } = req.body
   
     try {
       await axios.post(
@@ -40,27 +41,28 @@ app.post("/update-cobj", async (req, res) => {
         {
           associations: [],
           properties: {
-            name,
-            year,
-            genre
+            pet_first_name: name,
+            temperment: "Cool",
+            collar_coler: "Blue",
+            vaccine_status: "None",
           }
         },
         {
           headers: {
             authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-            "content-type": "application/json"
-          }
+           "content-type": "application/json"
         }
-      )
-    } catch (e) {
-        console.error(e)
-        res.status(500).send("Failure in POST /update-cobj")
       }
-    
-      res.redirect("/")
-      return
-    
-    })
+    )
+  } catch (e) {
+    console.error(e)
+
+    //res.status(500).send("Failure in POST /update-cobj")
+  }
+
+  res.redirect("/")
+  return
+})
 
 /** 
 * * This is sample code to give you a reference for how you should structure your calls. 
