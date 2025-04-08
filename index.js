@@ -1,4 +1,4 @@
-First commit to my Integrating With HubSpot I: Foundations practicum repository.
+//First commit to my Integrating With HubSpot I: Foundations practicum repository.
 
 const express = require('express');
 const axios = require('axios');
@@ -22,8 +22,11 @@ app.get("/", async (req, res) => {
 
 // * Code for Route 2 goes here
 app.get("/update-cobj", async (req, res) => {
-    return})
-
+    res.render('updates.pug', {
+        title: "Update Custom Object Form | Integrating With HubSpot I Practicum"
+      })
+    })
+    
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
