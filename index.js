@@ -33,8 +33,7 @@ app.get("/update-cobj", async (req, res) => {
 // * Code for Route 3 goes here
 app.post("/update-cobj", async (req, res) => {
 
-    const { name, bio, other_property } = req.body
-  
+    const { name, temperment, collar_coler, vaccine_status } = req.body  
     try {
       await axios.post(
         `https://api.hubapi.com/crm/v3/objects/2-42773951`,
@@ -42,9 +41,9 @@ app.post("/update-cobj", async (req, res) => {
           associations: [],
           properties: {
             pet_first_name: name,
-            temperment: "Cool",
-            collar_coler: "Blue",
-            vaccine_status: "None",
+            temperment,
+            collar_coler,
+            vaccine_status
           }
         },
         {
